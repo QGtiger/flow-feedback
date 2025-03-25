@@ -4,9 +4,16 @@ import { UserModel } from "./models/UserModel";
 import { token } from "./api";
 import ProSkeleton from "@ant-design/pro-skeleton";
 import RrwebPreview from "./components/RrwebPreview";
+import { useState } from "react";
+import classNames from "classnames";
+import FlowViewer from "./components/FlowViewer";
+import microApp from "@micro-zoe/micro-app";
+
+microApp.start();
 
 function AppPage() {
   const { userInfo } = UserModel.useModel();
+  const [tabKey, setTabKey] = useState("base");
 
   if (!userInfo) {
     return (
@@ -35,9 +42,24 @@ function AppPage() {
           key: "info",
         },
       ]}
-      onTabChange={console.log}
+      onTabChange={setTabKey}
     >
-      <RrwebPreview />
+      <div
+        className={classNames({
+          " hidden": tabKey !== "base",
+        })}
+      >
+        <RrwebPreview />
+      </div>
+
+      {/* <div
+        className={classNames({
+          " hidden": tabKey === "base",
+        })}
+      >
+        <FlowViewer />
+      </div> */}
+      {tabKey !== "base" && <FlowViewer />}
     </PageContainer>
   );
 }

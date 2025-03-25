@@ -1,13 +1,15 @@
 import axios from "axios";
-import { queryParam } from "../common";
+import { GlobalConfig, queryParam } from "../common";
 import { message } from "antd";
-
-export const API_BASE_URL = queryParam("apiBaseUrl");
 
 export const token = queryParam("token");
 
+if (token) {
+  localStorage.setItem("accessToken", token);
+}
+
 export const client = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: GlobalConfig.API_BASE_URL,
 });
 
 export const commonApiConfig = (function () {

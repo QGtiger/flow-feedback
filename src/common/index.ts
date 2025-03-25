@@ -13,3 +13,14 @@ export function queryParam(key: string) {
   const params = queryParams();
   return params[key];
 }
+
+export const GlobalConfig = {
+  YDConfig: {},
+  API_BASE_URL: "",
+};
+
+const YDConfig = JSON.parse(queryParam("YD") || "{}");
+// @ts-expect-error 类型补充
+GlobalConfig.YDConfig = window.YD = YDConfig;
+
+GlobalConfig.API_BASE_URL = YDConfig.API_URL;

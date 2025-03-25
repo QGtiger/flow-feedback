@@ -5,6 +5,7 @@ import "./main.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { CommonErrorBoundaryPanel } from "./components/CommonErrorBoundaryPanel/index.tsx";
+import "./common/index.ts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
