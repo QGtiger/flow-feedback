@@ -1,17 +1,29 @@
+import { UserModel } from "@/models/UserModel";
 import { Descriptions } from "antd";
 
 export default function UserDescription() {
+  const { userInfo } = UserModel.useModel();
+  const {
+    name,
+    enterpriseUserName,
+    phone,
+    tenantUuid,
+    uuid,
+    organizationUuid,
+    gradeName,
+  } = userInfo!;
   return (
     <Descriptions size="small" column={2}>
-      <Descriptions.Item label="创建人">张三</Descriptions.Item>
+      <Descriptions.Item label="创建人">
+        {name} ({enterpriseUserName})
+      </Descriptions.Item>
       <Descriptions.Item label="联系方式">
-        <a>421421</a>
+        <a>{phone}</a>
       </Descriptions.Item>
-      <Descriptions.Item label="创建时间">2017-01-10</Descriptions.Item>
-      <Descriptions.Item label="更新时间">2017-10-10</Descriptions.Item>
-      <Descriptions.Item label="备注">
-        中国浙江省杭州市西湖区古翠路
-      </Descriptions.Item>
+      <Descriptions.Item label="组织UUID">{organizationUuid}</Descriptions.Item>
+      <Descriptions.Item label="租户UUID">{tenantUuid}</Descriptions.Item>
+      <Descriptions.Item label="用户UUID">{uuid}</Descriptions.Item>
+      <Descriptions.Item label="备注">{gradeName}</Descriptions.Item>
     </Descriptions>
   );
 }
