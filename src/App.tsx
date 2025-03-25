@@ -3,6 +3,7 @@ import UserDescription from "./components/UserDescription";
 import { UserModel } from "./models/UserModel";
 import { token } from "./api";
 import ProSkeleton from "@ant-design/pro-skeleton";
+import RrwebPreview from "./components/RrwebPreview";
 
 function AppPage() {
   const { userInfo } = UserModel.useModel();
@@ -36,7 +37,7 @@ function AppPage() {
       ]}
       onTabChange={console.log}
     >
-      <div>Hello World</div>
+      <RrwebPreview />
     </PageContainer>
   );
 }

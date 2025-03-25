@@ -1,6 +1,7 @@
 import { createCustomModel } from "../common/createModel";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "../api/request";
+import { queryParam } from "@/common";
 
 interface UserModelType {
   organizationUuid: string;
@@ -29,5 +30,19 @@ export const UserModel = createCustomModel(() => {
     },
   });
 
-  return { userInfo };
+  const { data: events = [], isFetching } = useQuery({
+    queryKey: ["query-rrweb-events"],
+    queryFn() {
+      const screenRecordUrl = queryParam("screenRecordUrl");
+      if (!screenRecordUrl) return [];
+      return fetch(screenRecordUrl).then((r) => r.json());
+    },
+  });
+
+  return {
+    userInfo,
+    flowId: queryParam("flowId"),
+    events,
+    isFetchingRecordEvents: isFetching,
+  };
 });
